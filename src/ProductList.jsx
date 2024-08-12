@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./ProductList.css";
 import CartItem from "./CartItem";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "./CartSlice";
 
 function ProductList() {
@@ -236,36 +236,38 @@ function ProductList() {
 	};
 
 	const [showCart, setShowCart] = useState(false);
-	const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
+	const [showPlants, setShowPlants] = useState(false);
 
 	const dispatch = useDispatch();
+	const cartQuantities = useSelector((state) => state.cart.items);
+	const totalQuantities = cartQuantities.reduce((total, item) => total + item.quantity, 0);
 
 	const [addedToCart, setAddedToCart] = useState({});
-	const [totalQuantity, setTotalQuantity] = useState(0);
 
 	const handleCartClick = (e) => {
-		setShowCart(true); // Set showCart to true when cart icon is clicked
+		e.preventDefault();
+		setShowCart(true);
 	};
 	const handlePlantsClick = (e) => {
-		setShowPlants(true); // Set showAboutUs to true when "About Us" link is clicked
-		setShowCart(false); // Hide the cart when navigating to About Us
-	};
-
-	const handleContinueShopping = (e) => {
+		e.preventDefault();
+		setShowPlants(true);
 		setShowCart(false);
 	};
 
-	const handleAddToCart = (product) => {
-		dispatch(addItem(product));
-		setTotalQuantity(totalQuantity + 1);
+	const handleContinueShopping = (e) => {
+		setShowPlants(true);
+		setShowCart(false);
+	};
+
+	const handleAddToCart = (plant) => {
+		dispatch(addItem(plant));
 		setAddedToCart((prevState) => ({
 			...prevState,
-			[product.name]: true
+			[plant.name]: true
 		}));
 	};
 
-	const handleRemoveCart = (product) => {
-		dispatch(addItem(product));
+	const handleRemoveFromCart = (product) => {
 		setAddedToCart((prevState) => ({
 			...prevState,
 			[product.name]: false
@@ -289,7 +291,7 @@ function ProductList() {
 						</a>
 					</div>
 				</div>
-				<div className="right-container" style={styleObjUl}>
+				<div style={styleObjUl}>
 					<div>
 						<a href="#" onClick={(e) => handlePlantsClick(e)} style={styleA}>
 							Plants
@@ -297,7 +299,7 @@ function ProductList() {
 					</div>
 					<div>
 						<a href="#" onClick={(e) => handleCartClick(e)} style={styleA}>
-							<h1 className="cart">
+							<div className="cart-feature">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 256 256"
@@ -316,10 +318,10 @@ function ProductList() {
 										stroke-width="2"
 										id="mainIconPathAttribute"></path>
 								</svg>
-								{totalQuantity > 0 && (
-									<span className="item-qty">{totalQuantity}</span>
+								{totalQuantities > 0 && (
+									<span className="item-qty">{totalQuantities}</span>
 								)}
-							</h1>
+							</div>
 						</a>
 					</div>
 				</div>
@@ -340,9 +342,14 @@ function ProductList() {
 											className="product-image"
 										/>
 										<div className="product-title">{plant.name}</div>
+										<div className="product-description">
+											{plant.description}
+										</div>
 										<div className="product-price">{plant.cost}</div>
 										<button
-											className="product-button"
+											className={`product-button ${
+												plant.name ? "added-to-cart" : ""
+											}`}
 											onClick={() => handleAddToCart(plant)}
 											disabled={addedToCart[plant.name]}>
 											{addedToCart[plant.name]
@@ -356,7 +363,11 @@ function ProductList() {
 					))}
 				</div>
 			) : (
-				<CartItem onContinueShopping={handleContinueShopping} />
+				<CartItem
+					items={cartQuantities}
+					onContinueShopping={handleContinueShopping}
+					onRemoveFromCart={handleRemoveFromCart}
+				/>
 			)}
 		</div>
 	);
