@@ -5,10 +5,15 @@ import AboutUs from "./AboutUs";
 
 function App() {
 	const [showProductList, setShowProductList] = useState(false);
+	const [showAboutUs, setShowAboutUs] = useState(false);
 
 	const handleGetStartedClick = () => {
 		setShowProductList(true);
 	};
+
+	// const handleShowPopup = () => {
+	// 	setShowProductList(true);
+	// };
 
 	return (
 		<div className="app-container">
@@ -23,10 +28,9 @@ function App() {
 						<button className="get-started-button" onClick={handleGetStartedClick}>
 							Get Started
 						</button>
+						<button className="about-us-btn">About Us</button>
 					</div>
-					<div className="aboutus_container">
-						<AboutUs />
-					</div>
+					<AboutUs />
 				</div>
 			</div>
 			<div className={`product-list-container ${showProductList ? "visible" : ""}`}>
