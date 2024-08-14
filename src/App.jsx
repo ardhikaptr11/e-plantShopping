@@ -11,9 +11,9 @@ function App() {
 		setShowProductList(true);
 	};
 
-	// const handleShowPopup = () => {
-	// 	setShowProductList(true);
-	// };
+	const handleShowPopup = () => {
+		alert("Coming soon!")
+	};
 
 	return (
 		<div className="app-container">
@@ -28,7 +28,7 @@ function App() {
 						<button className="get-started-button" onClick={handleGetStartedClick}>
 							Get Started
 						</button>
-						<button className="about-us-btn">About Us</button>
+						<button className="about-us-btn" onClick={handleShowPopup}>About Us</button>
 					</div>
 					<AboutUs />
 				</div>

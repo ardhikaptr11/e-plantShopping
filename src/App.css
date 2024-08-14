@@ -5,10 +5,6 @@
 	box-sizing: border-box;
 }
 
-/* body {
-	overflow: hidden;
-} */
-
 .landing-page {
 	position: relative;
 	width: 100vw;
@@ -59,16 +55,16 @@
 
 .landing_content h1 {
 	font-size: 3rem;
-	margin-bottom: 10px;
 }
 
 .landing_content p {
 	font-size: 1.5rem;
+	margin-bottom: 10px;
 }
 
 .divider {
-	width: 50px;
-	height: 2px;
+	width: 60%;
+	height: 5px;
 	background-color: #4caf50;
 	margin: 10px 0;
 }
@@ -95,6 +91,7 @@
 
 .get-started-button {
 	padding: 15px 25px;
+	margin-top: 20px;
 	font-size: 23px;
 	border: none;
 	border-radius: 5px;
@@ -108,18 +105,6 @@
 	background-color: #45a049;
 }
 
-.get-started-button1 {
-	padding: 15px 75px;
-	font-size: 23px;
-	border: none;
-	border-radius: 5px;
-	background-color: #4caf50;
-	color: white;
-	cursor: pointer;
-	transition: background-color 0.3s ease;
-	margin-top: 20px;
-}
-
 .about-us-btn {
 	padding: 15px 35px;
 	font-size: 23px;
@@ -129,7 +114,6 @@
 	color: white;
 	cursor: pointer;
 	transition: background-color 0.3s ease;
-	margin-top: 20px;
 	display: none;
 }
 /* LandingPage.css */
@@ -149,7 +133,6 @@
 	}
 
 	.landing_content {
-		margin-top: 100px;
 		margin-left: 0;
 		width: 80%;
 		text-align: center;
@@ -168,7 +151,6 @@
 
 @media screen and (max-width: 480px) {
 	.landing_content {
-		margin-top: 50px;
 		width: 90%;
 	}
 
