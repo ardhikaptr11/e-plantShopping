@@ -22,7 +22,7 @@
 	background-image: url("https://cdn.pixabay.com/photo/2017/07/13/08/59/greenhouse-2499758_1280.jpg");
 	background-size: 100% 100%;
 	background-position: center;
-	filter: brightness(0.8);
+	filter: brightness(0.4);
 }
 .content {
 	display: flex;
@@ -70,7 +70,6 @@
 }
 
 /* ProductList.css */
-
 .product-list-container {
 	position: fixed;
 	top: 100vh;
@@ -86,7 +85,6 @@
 
 .product-list-container.visible {
 	top: 0;
-	/* position: relative; */
 }
 
 .get-started-button {
@@ -116,8 +114,8 @@
 	transition: background-color 0.3s ease;
 	display: none;
 }
-/* LandingPage.css */
 
+/* Media Queries */
 @media screen and (max-width: 992px) {
 	.landing_content h1 {
 		font-size: 2.5rem;
